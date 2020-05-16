@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<block>
+	<name>zero_unpad</name>
+	<key>drm_receiver_zero_unpad</key>
+	<category>[DRM Receiver]</category>
+	<import>import drm_receiver</import>
+	<make>drm_receiver.zero_unpad($fft_len, $vector_len)</make>
+	<!-- Make one 'param' node for every Parameter you want settable from the 
+		GUI. Sub-nodes: * name * key (makes the value accessible as $keyname, e.g. 
+		in the make node) * type -->
+	<param>
+		<name>FFT Size</name>
+		<key>fft_len</key>
+		<value>fft_len</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Vector Length</name>
+		<key>vector_len</key>
+		<value>vector_len</value>
+		<type>int</type>
+	</param>
+
+	<!-- Make one 'sink' node per input. Sub-nodes: * name (an identifier for 
+		the GUI) * type * vlen * optional (set to 1 for optional inputs) -->
+	<sink>
+		<name>in</name>
+		<type>complex</type>
+		<vlen>$fft_len</vlen>
+	</sink>
+
+	<!-- Make one 'source' node per output. Sub-nodes: * name (an identifier 
+		for the GUI) * type * vlen * optional (set to 1 for optional inputs) -->
+	<source>
+		<name>out</name>
+		<type>complex</type>
+		<vlen>$vector_len</vlen>
+	</source>
+</block>
