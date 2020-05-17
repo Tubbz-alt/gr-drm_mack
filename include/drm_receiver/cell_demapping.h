@@ -46,7 +46,7 @@ namespace gr {
        * class. drm_receiver::cell_demapping::make is the public interface for
        * creating new instances.
        */
-      static sptr make(size_t nfft, size_t vector_len);
+      static sptr make(size_t ifft_length);
     };
 
   } // namespace drm_receiver

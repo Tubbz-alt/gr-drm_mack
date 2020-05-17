@@ -28,9 +28,10 @@
 
 #include "qa_drm_receiver.h"
 
-CppUnit::TestSuite* qa_drm_receiver::suite()
+CppUnit::TestSuite *
+qa_drm_receiver::suite()
 {
-    CppUnit::TestSuite* s = new CppUnit::TestSuite("drm_receiver");
+  CppUnit::TestSuite *s = new CppUnit::TestSuite("drm_receiver");
 
-    return s;
+  return s;
 }

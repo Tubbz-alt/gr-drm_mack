@@ -25,9 +25,10 @@ include(GrPlatform) #define LIB_SUFFIX
 
 include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
+
 list(APPEND drm_receiver_sources
-    zero_unpad_impl.cc
-    cell_demapping_impl.cc )
+    cell_demapping_impl.cc
+)
 
 set(drm_receiver_sources "${drm_receiver_sources}" PARENT_SCOPE)
 if(NOT drm_receiver_sources)

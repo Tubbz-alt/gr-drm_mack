@@ -17,7 +17,7 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
+
 install(FILES
-    drm_receiver_zero_unpad.xml
     drm_receiver_cell_demapping.xml DESTINATION share/gnuradio/grc/blocks
 )

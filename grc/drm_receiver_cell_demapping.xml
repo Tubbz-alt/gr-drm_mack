@@ -2,25 +2,17 @@
 <block>
   <name>cell_demapping</name>
   <key>drm_receiver_cell_demapping</key>
-  <category>[DRM Receiver]</category>
+  <category>[drm_receiver]</category>
   <import>import drm_receiver</import>
-  <make>drm_receiver.cell_demapping($ncells, $nsymbols)</make>
+  <make>drm_receiver.cell_demapping($ifft_length)</make>
   <!-- Make one 'param' node for every Parameter you want settable from the GUI.
        Sub-nodes:
        * name
        * key (makes the value accessible as $keyname, e.g. in the make node)
        * type -->
   <param>
-    <name>Number of cells</name>
-    <key>ncells</key>
-    <value>ncells</value>
-    <type>int</type>
-  </param>
-  <param>
-    <name>Number of symbols (super frame)</name>
-    <key>nsymbols</key>
-    <value>nsymbols</value>
-    <!-- <type>int</type> -->
+    <name>Cells</name>
+    <key>ifft_length</key>
     <type>int</type>
   </param>
 
@@ -34,8 +26,11 @@
     <type>complex</type>
   </sink>
 
-  <!-- Make one 'source' node per output. Sub-nodes: * name (an identifier 
-		for the GUI) * type * vlen * optional (set to 1 for optional inputs) -->
+  <!-- Make one 'source' node per output. Sub-nodes:
+       * name (an identifier for the GUI)
+       * type
+       * vlen
+       * optional (set to 1 for optional inputs) -->
   <source>
     <name>out</name>
     <type>complex</type>

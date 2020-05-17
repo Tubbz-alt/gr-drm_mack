@@ -26,9 +26,9 @@
 #include <gnuradio/attributes.h>
 
 #ifdef gnuradio_drm_receiver_EXPORTS
-#define DRM_RECEIVER_API __GR_ATTR_EXPORT
+#  define DRM_RECEIVER_API __GR_ATTR_EXPORT
 #else
-#define DRM_RECEIVER_API __GR_ATTR_IMPORT
+#  define DRM_RECEIVER_API __GR_ATTR_IMPORT
 #endif
 
 #endif /* INCLUDED_DRM_RECEIVER_API_H */

@@ -23,6 +23,5 @@
 ########################################################################
 install(FILES
     api.h
-    zero_unpad.h
     cell_demapping.h DESTINATION include/drm_receiver
 )

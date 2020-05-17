@@ -31,9 +31,9 @@
 
 class __GR_ATTR_EXPORT qa_drm_receiver
 {
-public:
-    //! return suite of tests for all of gr-filter directory
-    static CppUnit::TestSuite* suite();
+ public:
+  //! return suite of tests for all of gr-filter directory
+  static CppUnit::TestSuite *suite();
 };
 
 #endif /* _QA_DRM_RECEIVER_H_ */

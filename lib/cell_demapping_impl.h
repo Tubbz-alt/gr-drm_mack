@@ -23,9 +23,9 @@
 
 #include <drm_receiver/cell_demapping.h>
 
+#define LAST_SYMBOL_SUPERFRAME    44
 #define QT_FREQUENCY_REF_CELLS    3
 #define QT_FAC_CELLS_B            6
-#define LAST_SYMBOL_SUPERFRAME    44
 
 namespace gr {
   namespace drm_receiver {
@@ -36,52 +36,49 @@ namespace gr {
       // Nothing to declare in this block.
 
      public:
-      cell_demapping_impl(size_t ncells, size_t nsymbols);
+      cell_demapping_impl(size_t ifft_length);
       ~cell_demapping_impl();
-
-      int ninput_cells, ninput_symbols;
-      int cell_index, symbol_index;
+      int ninput_cells;
+      int cell_index;
+      // portadoras que contêm frequência. (ref: Table 86)
       int table_fr_cells[4][QT_FREQUENCY_REF_CELLS] = 
       {
         {18, 54, 72},
         {16, 48, 64},
         {11, 33, 44},
         { 7, 21, 28}
-      }; // portadoras que contém frequência. Table 86
+      };
+      // portadoras que contêm referências de tempo
       int table_time_reference_cells[16] = 
       {
         // modo A: (TODO mudar a estrutura de dados)
         //{17, 19, 21, 28, 29, 32, 33, 39, 40, 41, 53, 55, 56, 60, 61, 63, 71, 73},
         14, 18, 20, 24, 26, 32, 36, 42, 44, 49, 50, 54, 56, 62, 66, 68,
       };
+      // portadoras que contêm FAC no modo B. (ref: Table 98)
       int table_fac_cells_B[65][2] = 
       {
-        { 2,13}, { 2,25}, { 2,43}, { 2,55}, { 2,67},          //  2
-        { 3,15}, { 3,27}, { 3,45}, { 3,57}, { 3,69},          //  3
-        { 4,17}, { 4,29}, { 4,47}, { 4,59}, { 4,71},          //  4
-        { 5,19}, { 5,31}, { 5,49}, { 5,61}, { 5,73},          //  5
-        { 6, 9}, { 6,21}, { 6,33}, { 6,51}, { 6,63}, { 6,75}, //  6
-        { 7,11}, { 7,23}, { 7,35}, { 7,53}, { 7,65}, { 7,77}, //  7
-        { 8,13}, { 8,25}, { 8,37}, { 8,55}, { 8,67}, { 8,79}, //  8
-        { 9,15}, { 9,27}, { 9,39}, { 9,57}, { 9,69}, { 9,81}, //  9
-        {10,17}, {10,29}, {10,41}, {10,59}, {10,71}, {10,83}, // 10
-        {11,19}, {11,31}, {11,43}, {11,61}, {11,73},          // 11
-        {12,21}, {12,33}, {12,45}, {12,63}, {12,75},          // 12
-        {13,23}, {13,35}, {13,47}, {13,65}, {13,77}           // 13
-      }; // portadoras que contém FAC no modo B. Table 98
+        { 2,13}, { 2,25}, { 2,43}, { 2,55}, { 2,67},
+        { 3,15}, { 3,27}, { 3,45}, { 3,57}, { 3,69},
+        { 4,17}, { 4,29}, { 4,47}, { 4,59}, { 4,71},
+        { 5,19}, { 5,31}, { 5,49}, { 5,61}, { 5,73},
+        { 6, 9}, { 6,21}, { 6,33}, { 6,51}, { 6,63}, { 6,75},
+        { 7,11}, { 7,23}, { 7,35}, { 7,53}, { 7,65}, { 7,77},
+        { 8,13}, { 8,25}, { 8,37}, { 8,55}, { 8,67}, { 8,79},
+        { 9,15}, { 9,27}, { 9,39}, { 9,57}, { 9,69}, { 9,81},
+        {10,17}, {10,29}, {10,41}, {10,59}, {10,71}, {10,83},
+        {11,19}, {11,31}, {11,43}, {11,61}, {11,73},
+        {12,21}, {12,33}, {12,45}, {12,63}, {12,75},
+        {13,23}, {13,35}, {13,47}, {13,65}, {13,77}
+      };
 
       // Where all the action really happens
       void forecast (int noutput_items, gr_vector_int &ninput_items_required);
-      int get_current_cell (void);
-      void set_current_cell (int arg);
-      int get_current_symbol (void);
-      void set_current_symbol (int arg);
-      int check_time_reference_cell(int cell_index, int symbol_index);
+      int check_time_reference_cell (int cell_index, int symbol_index);
       int check_fac_cell (int cell_index, int symbol_index);
       int check_freq_cell (int cell_index);
       int check_gain_cell (int cell_index, int symbol_index);
-      int cell_demapping(int cell_index, int symbol_index);
-
+      int cell_demapping (int cell_index, int symbol_index);
       int general_work(int noutput_items,
            gr_vector_int &ninput_items,
            gr_vector_const_void_star &input_items,
@@ -92,3 +89,4 @@ namespace gr {
 } // namespace gr
 
 #endif /* INCLUDED_DRM_RECEIVER_CELL_DEMAPPING_IMPL_H */
+
