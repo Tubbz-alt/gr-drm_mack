@@ -113,7 +113,7 @@
     </param>
     <param>
       <key>value</key>
-      <value>64</value>
+      <value>4</value>
     </param>
   </block>
   <block>
@@ -256,7 +256,7 @@ audio_sample_rate.</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>True</value>
+      <value>0</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -413,7 +413,7 @@ audio_sample_rate.</value>
     </param>
     <param>
       <key>_enabled</key>
-      <value>0</value>
+      <value>1</value>
     </param>
     <param>
       <key>_coordinate</key>
@@ -623,7 +623,7 @@ and create transmission frames.</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(208, 380)</value>
+      <value>(224, 380)</value>
     </param>
     <param>
       <key>_rotation</key>

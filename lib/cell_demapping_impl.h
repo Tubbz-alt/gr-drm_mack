@@ -39,7 +39,6 @@ namespace gr {
       cell_demapping_impl(size_t ifft_length);
       ~cell_demapping_impl();
       int ninput_cells;
-      int cell_index;
       // portadoras que contêm frequência. (ref: Table 86)
       int table_fr_cells[4][QT_FREQUENCY_REF_CELLS] = 
       {

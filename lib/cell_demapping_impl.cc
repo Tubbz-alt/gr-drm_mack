@@ -45,7 +45,6 @@ namespace gr {
     {
       // o tamanho da fft é o número de portadoras
       ninput_cells = ifft_length;
-      cell_index = 0;
     }
 
     /*
@@ -233,7 +232,8 @@ namespace gr {
       const gr_complex *in = (const gr_complex *) input_items[0];
       gr_complex *out = (gr_complex *) output_items[0];
       static int symbol_index = 0; // indexa o símbolo atual do super frame
-      int nconsumed_items = 0;
+      static int cell_index = 0;
+      gr_complex *in_msc = (gr_complex *)in;
       int nreturned_items = 0;
 
       // Do <+signal processing+>
@@ -241,9 +241,19 @@ namespace gr {
       {
         if (cell_index >= (ninput_cells / 2) - 103 && cell_index <= (ninput_cells / 2) + 103)
         {
-          if (!cell_demapping(cell_index, symbol_index))
+          if (!cell_demapping (cell_index, symbol_index))
           {
-            out[nreturned_items] = in[cell_index + (out_count / ninput_cells) * ninput_cells];
+            //out[nreturned_items] = in[cell_index + (out_count / ninput_cells) * ninput_cells];
+            out[nreturned_items] = *in_msc;
+            /*if (out[nreturned_items].real() == 0)
+            {
+              printf("nreturned_items:  %i\n", nreturned_items);
+              printf("ninput_cells:     %i\n", ninput_cells);
+              printf("noutput_items:    %i\n", noutput_items);
+              printf("cell_index:       %i\n", cell_index);
+              printf("symbol_index:     %i\n", symbol_index);
+              exit(0);
+            }*/
             nreturned_items++;
           }
         }
@@ -255,13 +265,13 @@ namespace gr {
                 symbol_index = 0;
         }
 
-        nconsumed_items++;
+        in_msc++;
       }
 
       // Tell runtime system how many input items we consumed on
       // each input stream.
-      consume_each (nconsumed_items);
-
+      consume_each (noutput_items);
+      
       // Tell runtime system how many output items we produced.
       return nreturned_items;
     }
